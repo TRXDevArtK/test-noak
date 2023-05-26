@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p>pls open console in browser, reload page for code to running again</p>
+
+<script>
+    //in typescript you can create class doctor and recheck it using depedency injection
+    // class Doctor{
+    //     constructor(name, consultTime){
+    //         this.name = name;
+    //         this.consultTime = consultTime;
+    //     }
+    //     //setter, getter
+    // }
+
+    class Doctor{
+        constructor(arrDoctor){
+            this.arrDoctor = arrDoctor;
+        }
+        //setter, getter
+
+        // getArrDoctorName(){}
+        // getArrDoctorConsultTime(){}
+
+        getAllDoctor(){
+            return this.arrDoctor;
+        }
+    }
+
+    class Patient{
+        constructor(arrPatient){
+            this.arrPatient = arrPatient;
+        }
+        //setter, getter
+
+        // getArrPatientName(){}
+
+        getAllPatient(){
+            return this.arrPatient;
+        }
+    }
+
+    let doctor = new Doctor([
+        {
+            name:'doctor a',
+            consultTime:3,
+            totalConsultTime:3
+        },
+        {
+            name:'doctor b',
+            consultTime:4,
+            totalConsultTime:4
+        }
+    ]);
+    doctor = doctor.getAllDoctor();
+
+    let patient = new Patient([
+        {
+            name:'patient 1',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 2',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 3',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 4',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 5',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 6',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 7',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 8',
+            endTime:null,
+            appointment:null
+        },
+        {
+            name:'patient 9',
+            endTime:null,
+            appointment:null
+        }
+    ]);
+    patient = patient.getAllPatient();
+
+    let appointedPatient = [];
+    let currentPatient = null;
+    
+    //NOTE : the code can become multiple function instead of one like this
+    function start(){
+        //loop according to patient length
+        for(let i=0;i<patient.length;i++){
+
+            //check patient that doesn't have appointment
+            for(let i=0;i<patient.length;i++){
+                if(patient[i].appointment == null){
+                    currentPatient = patient[i];
+                    break;
+                }
+            }
+
+            currentDoctorName = '';
+            currentDoctorTime = 0;
+
+            // search for doctor name
+            for(let i=0;i<doctor.length;i++){
+                if(doctor[i]['totalConsultTime'] < currentDoctorTime || currentDoctorTime == 0){
+                    currentDoctorName = doctor[i]['name'];
+                    currentDoctorTime = doctor[i]['totalConsultTime'];
+                }
+            }
+
+            // totalConsultTime need to increase for selected doctor name
+            for(let i=0;i<doctor.length;i++){
+                if(doctor[i]['name'] == currentDoctorName){
+                    doctor[i]['totalConsultTime'] += doctor[i]['consultTime'];
+                }
+            }
+
+            currentPatient['endTime'] = currentDoctorTime;
+            currentPatient['appointment'] = currentDoctorName;
+
+            for(let i=0;i<patient.length;i++){
+                if(patient[i]['name'] == currentPatient['name']){
+                    patient[i]['endTime'] = currentPatient['endTime'];
+                    patient[i]['appointment'] = currentPatient['appointment'];
+                }
+            }
+        }
+    }
+
+    start();
+
+    console.log(patient);
+
+</script>
+</body>
+</html>
